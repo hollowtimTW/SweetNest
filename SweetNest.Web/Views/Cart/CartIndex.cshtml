@@ -1,0 +1,102 @@
+﻿@using System.Globalization
+@model CartDto
+
+@if(Model.CartHeader!=null && Model.CartDetails?.Count()>0){
+<form method="post" asp-action="EmailCart">
+    <br />
+    <input asp-for="CartHeader.UserId" hidden />
+    <input asp-for="CartHeader.CartHeaderId" hidden />
+    <div class="">
+        <div class="card border mt-4 container">
+            <div class="card-header bg-dark text-light ml-0 row ">
+                <div class="col-6">
+                    <h3 class="text-white"><i class="bi bi-cart"></i> &nbsp; 購物車</h3>
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-action="Products" asp-controller="Home" class="btn btn-outline-warning mt-2 btn-sm">繼續購物</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="col-12 text-end">
+                        <a asp-action="Clear" asp-route-cartHeaderId="@Model.CartHeader.CartHeaderId" class="btn btn-danger">清空購物車</a>
+                </div>
+                <div class=" d-none d-lg-block">
+                    <div class="row text-info">
+                        <div class="col-lg-2">
+                        </div>
+                        <div class="col-lg-5">
+                            商品細節
+                        </div>
+                        <div class="col-lg-2">
+                            價格
+                        </div>
+                        <div class="col-lg-2">
+                            數量
+                        </div>
+                        <div class="col-lg-1">
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                @foreach(var cartObj in Model.CartDetails){
+                <div class="row h-100">
+                    <div class="col-4 col-md-2 text-center py-2">
+                        <img src="@cartObj.Product.ImageUrl" class="rounded" width="100%" />
+                    </div>
+                    <div class="col-8 col-md-5">
+                        <h5>@cartObj.Product.Name</h5>
+                        <div style="font-size:11px;">@Html.Raw(cartObj.Product.Description)</div>
+                    </div>
+                    <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                                <span style="font-size:17px;">@cartObj.Product.Price.ToString("C", new CultureInfo("zh-TW")) </span>
+                    </div>
+                    <div class="col-3 col-md-2 pt-md-4" style="font-size:11px;">
+                        <span style="font-size:17px;"> @cartObj.Count</span>
+                    </div>
+                    <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
+                        <a asp-action="Remove" asp-route-cartDetailsId="@cartObj.CartDetailsId" class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                }
+                <hr />
+                <div class="row">
+                    <div class="col-6">
+                        @if (string.IsNullOrEmpty(Model.CartHeader.CouponCode))
+                        {
+                            <span>Coupon:</span>
+                            <input asp-for="CartHeader.CouponCode" />
+                            <button type="submit" asp-action="ApplyCoupon" class="btn btn-sm btn-success"> 使用 </button>
+                        }
+                        else
+                        {
+                            <span>Coupon:</span>
+                            <input asp-for="CartHeader.CouponCode" disabled/>
+                            <button type="submit" asp-action="RemoveCoupon" class="btn btn-sm btn-success"> 移除 </button>
+                        }
+                    </div>
+                    <div class="col-6 text-end">
+                            <span class="text-danger" style="font-size:21px;">  合計：  @Model.CartHeader.CartTotal.ToString("C", new CultureInfo("zh-TW"))  <br /></span>
+                        @if (Model.CartHeader.Discount > 0)
+                        {
+                            <span class="text-success"> 訂單折扣：   @Model.CartHeader.Discount.ToString("C", new CultureInfo("zh-TW")) </span>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer row">
+                <div class="col-12 col-md-3 offset-md-9 text-end">
+                    <a asp-action="Checkout" class="btn btn-success form-control">前往結帳</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+}
+else{
+    <div>
+        <p>您的購物車是空的</p>
+    </div>
+}

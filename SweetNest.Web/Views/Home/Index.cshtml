@@ -1,0 +1,94 @@
+﻿@section Styles{
+    <style>
+        .hero {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .carousel img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .latest-news h2 {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .latest-news ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .latest-news li {
+            margin: 15px 0;
+        }
+    </style>
+}
+
+
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>歡迎來到 SweetNest</h1>
+        <p>探索我們的精緻甜點，讓每一天都充滿甜蜜！</p>
+    </div>
+
+    <!-- Carousel Section -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/h3.png" class="d-block w-100" alt="甜點圖片1">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/h1.png" class="d-block w-100" alt="甜點圖片2">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/h2.png" class="d-block w-100" alt="甜點圖片3">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Latest News Section -->
+    <div class="latest-news mt-5">
+        <h2 class="text-center mb-4">最新消息</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/images/n1.png" class="card-img-top" alt="新品上市">
+                    <div class="card-body">
+                        <h5 class="card-title">新品上市！</h5>
+                        <p class="card-text">我們推出了全新的草莓千層蛋糕，快來品嚐吧！</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/images/n2.png" class="card-img-top" alt="限時優惠">
+                    <div class="card-body">
+                        <h5 class="card-title">限時優惠</h5>
+                        <p class="card-text">本週購買任意兩款甜點，即可享九折優惠！</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="/images/n3.png" class="card-img-top" alt="甜點工作坊">
+                    <div class="card-body">
+                        <h5 class="card-title">甜點工作坊</h5>
+                        <p class="card-text">報名參加我們的甜點製作課程，親手製作屬於你的甜點！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

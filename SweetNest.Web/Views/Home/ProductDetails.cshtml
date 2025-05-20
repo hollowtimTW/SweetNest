@@ -1,0 +1,36 @@
+﻿@using System.Globalization
+@model ProductDto
+
+<div class="container py-5">
+    <div class="row">
+        <!-- 左側圖片區 -->
+        <div class="col-12 col-lg-6 text-center">
+            <img src="@Model.ImageUrl" alt="Product Image" class="img-fluid rounded shadow-sm" style="max-height: 400px;" />
+        </div>
+
+        <!-- 右側產品資訊區 -->
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold">@Model.Name</h1>
+            <h2 class="text-warning fw-bold">@Model.Price.ToString("C", new CultureInfo("zh-TW"))</h2>
+            <span class="badge bg-primary fs-6">@Model.CategoryName</span>
+            <p class="mt-4 text-muted">@Html.Raw(Model.Description)</p>
+
+            <form method="post" class="mt-4">
+                <input asp-for="ProductId" type="hidden" />
+                <div class="mb-3">
+                    <label asp-for="Count" class="form-label fw-bold">數量</label>
+                    <input asp-for="Count" class="form-control w-50" value="1" />
+                    <span asp-validation-for="Count" class="text-danger"></span>
+                </div>
+                <div class="d-flex gap-3">
+                    <a asp-action="Products" class="btn btn-outline-secondary btn-lg flex-grow-1">返回</a>
+                    <button type="submit" class="btn btn-primary btn-lg flex-grow-1">加入購物車</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
